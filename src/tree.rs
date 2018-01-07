@@ -17,6 +17,10 @@ impl<T: PartialOrd+Clone> Node<T> {
     }
 
 
+    fn value(&self)->T{
+        self.value.clone()
+    }
+
     fn push(mut node: Node<T>, value: T) -> Node<T> {
         if value > node.value {
             match  node.right{
@@ -59,23 +63,49 @@ impl<T: PartialOrd+Clone> Node<T> {
         }
     }
 
-    fn find(&self,value:T)->bool{
+    fn find(&self,value:T)->Option<Box<&Node<T>>>{
         if value > self.value{
             match self.right {
-                None=>false,
+                None=>None,
                 Some(ref n)=>Node::find(&*n,value)
             }
         }else if value < self.value{
             match self.left {
-                None=>false,
+                None=>None,
                 Some(ref n)=>Node::find(&*n,value)
             }
         }else{
-            true
+            Some(Box::from(self))
         }
     }
 
 
+
+    fn delete(mut child:Child<T>,value:T)->Child<T>{
+        match child{
+            None=>None,
+            Some(mut r)=>{
+                if value > r.value(){
+                    r.right =
+                        Node::delete(r.right.clone(),value)  ;
+                    Some(r)
+                }else if value < r.value() {
+                    r.left  = Node::delete(r.left.clone() ,value);
+                    Some(r)
+                }else{
+                    if r.right.is_none(){
+                        r.left
+                    }else if r.left.is_none() {
+                        r.right
+                    }else{
+                        r.value = r.min();
+                        r.right = Node::delete(r.right.clone(),r.value.clone());
+                        Some(r)
+                    }
+                }
+            }
+        }
+    }
 }
 
 #[derive(Debug, PartialOrd, PartialEq,Clone)]
@@ -115,10 +145,22 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn find(&self,value:T)->bool {
+    pub fn find(&self,value:T)->Option<Box<&Node<T>>> {
         match self.root {
-            None=>false,
+            None=>None,
             Some(ref n)=>n.find(value)
         }
+    }
+
+    pub fn exists(&self,value:T)->bool{
+        match self.find(value){
+            None=>false,
+            _=>true
+        }
+    }
+
+    pub fn delete(mut self,value:T)->Tree<T>{
+        self.root = Node::delete(self.root,value);
+        self
     }
 }

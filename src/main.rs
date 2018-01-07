@@ -13,12 +13,17 @@ fn main() {
         .push("6")
         .push("z");
 
-
     println!("{:?}",tree);
     println!("{:?}",tree.min());
     println!("{:?}",tree.max());
     println!("{:?}",tree.find("123"));
-    println!("{:?}",tree.find("z"));
+    println!("{:?}",tree.find("a"));
 
+    let tree = tree
+        .delete("5")
+        .delete("10")
+        .delete("b");
+
+    println!("{:?}",tree);
 
 }

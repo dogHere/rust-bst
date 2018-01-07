@@ -1,6 +1,6 @@
 # rust-bst
 
-A BST Tree in rust.
+A BST Tree in rust(Keep writing).
 
 # Example
 

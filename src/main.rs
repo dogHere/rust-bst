@@ -13,6 +13,5 @@ fn main() {
         .push(String::from("6"));
 
 
-
     println!("{:?}",tree);
 }

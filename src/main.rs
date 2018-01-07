@@ -16,6 +16,8 @@ fn main() {
     println!("{:?}",tree);
     println!("{:?}",tree.min());
     println!("{:?}",tree.max());
+    println!("{:?}",tree.exists("12"));
+    println!("{:?}",tree.exists("z"));
     println!("{:?}",tree.find("123"));
     println!("{:?}",tree.find("a"));
 

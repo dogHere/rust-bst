@@ -40,4 +40,4 @@ fn main() {
 ```
 
 # License
-Apache License 2.0,See [License](License)
+Apache License 2.0,See [License](LICENSE)

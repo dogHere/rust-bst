@@ -1,3 +1,5 @@
+use std::mem::swap;
+
 type Child<T> = Option<Box<Node<T>>>;
 
 #[derive(Debug, Eq, PartialOrd, PartialEq,Clone)]
@@ -21,31 +23,25 @@ impl<T: PartialOrd+Clone> Node<T> {
         self.value.clone()
     }
 
-    fn push(mut node: Node<T>, value: T) -> Node<T> {
-        if value > node.value {
-            match  node.right{
+    fn push(&mut self, value: T)  {
+        if value > self.value {
+            match  self.right{
                 None=>{
-                    node.right = Some(Box::from(Node::new(value)));
-                    node
+                    swap(&mut self.right, &mut Some(Box::from(Node::new(value))));
                 },
-                Some(n)=>{
-                    node.right = Some(Box::from(Node::push(*n, value)));
-                    node
+                Some(ref mut n)=>{
+                    n.push(value)
                 }
             }
-        } else if value < node.value {
-            match  node.left{
+        } else if value < self.value {
+            match  self.left{
                 None=>{
-                    node.left = Some(Box::from(Node::new(value)));
-                    node
+                    swap(&mut self.left ,&mut Some(Box::from(Node::new(value))));
                 },
-                Some(n)=>{
-                    node.left = Some(Box::from(Node::push(*n, value)));
-                    node
+                Some(ref mut n)=>{
+                    n.push(value)
                 }
             }
-        } else {
-            node
         }
     }
 
@@ -63,16 +59,16 @@ impl<T: PartialOrd+Clone> Node<T> {
         }
     }
 
-    fn find(&self,value:T)->Option<Box<&Node<T>>>{
-        if value > self.value{
+    fn find(&self,value:&T)->Option<Box<&Node<T>>>{
+        if value > &self.value{
             match self.right {
                 None=>None,
-                Some(ref n)=>Node::find(&*n,value)
+                Some(ref n)=>Node::find(&*n,&value)
             }
-        }else if value < self.value{
+        }else if value < &self.value{
             match self.left {
                 None=>None,
-                Some(ref n)=>Node::find(&*n,value)
+                Some(ref n)=>Node::find(&*n,&value)
             }
         }else{
             Some(Box::from(self))
@@ -81,29 +77,40 @@ impl<T: PartialOrd+Clone> Node<T> {
 
 
 
-    fn delete(mut child:Child<T>,value:T)->Child<T>{
-        match child{
-            None=>None,
-            Some(mut r)=>{
-                if value > r.value(){
-                    r.right =
-                        Node::delete(r.right.clone(),value)  ;
-                    Some(r)
-                }else if value < r.value() {
-                    r.left  = Node::delete(r.left.clone() ,value);
-                    Some(r)
+    fn delete(node:&mut Child<T>,value:T){
+        let mut  all_none = false;
+        match *node{
+            None=>{},
+            Some(ref mut r)=>{
+                if !r.left.is_some() && !r.right.is_some(){
+                    all_none = true;
                 }else{
-                    if r.right.is_none(){
-                        r.left
-                    }else if r.left.is_none() {
-                        r.right
+
+                    if value > r.value(){
+                        Node::delete(&mut r.right,value);
+                    }else if value < r.value() {
+                        Node::delete(&mut r.left,value);
                     }else{
-                        r.value = r.min();
-                        r.right = Node::delete(r.right.clone(),r.value.clone());
-                        Some(r)
+                        if r.right.is_none(){
+                            let t = r.left.take();
+                            swap( &mut r.value,&mut t.unwrap().value);
+                            swap( &mut None,&mut r.left);
+                        }else if r.left.is_none() {
+                            let t = r.right.take();
+                            swap( &mut r.value,&mut t.unwrap().value);
+                            swap( &mut None,&mut r.right);
+                        }else{
+                            let mut m  = r.right.take().unwrap().min();
+                            swap(&mut None,&mut r.find(&m));
+                            swap(&mut r.value,&mut m);
+                        }
                     }
                 }
+
             }
+        }
+        if all_none{
+            swap(node,&mut None);
         }
     }
 }
@@ -120,14 +127,14 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn push(mut self, value: T)->Tree<T> {
-        if self.root.is_none() {
-            self.root = Some(Box::from(Node::new(value)));
-            self
-        } else {
-            let r = self.root.take();
-            self.root = Some(Box::from(Node::push(*r.unwrap(), value)));
-            self
+    pub fn push(&mut self, value: T) {
+        match self.root {
+            None=>{
+                swap(&mut self.root,&mut Some(Box::from(Node::new(value))));
+            },
+            Some(ref mut n) => {
+                n.push(value);
+            }
         }
     }
 
@@ -145,22 +152,21 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn find(&self,value:T)->Option<Box<&Node<T>>> {
+    pub fn find(&self,value:&T)->Option<Box<&Node<T>>> {
         match self.root {
             None=>None,
             Some(ref n)=>n.find(value)
         }
     }
 
-    pub fn exists(&self,value:T)->bool{
+    pub fn exists(&self,value:&T)->bool{
         match self.find(value){
             None=>false,
             _=>true
         }
     }
 
-    pub fn delete(mut self,value:T)->Tree<T>{
-        self.root = Node::delete(self.root,value);
-        self
+    pub fn delete(&mut self,value:T){
+        Node::delete(&mut self.root,value);
     }
 }

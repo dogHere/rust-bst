@@ -11,13 +11,13 @@ use bst::tree::*;
 
 fn main() {
     let mut tree = Tree::new();
-    tree.push("a");
-    tree.push("b");
-    tree.push("5");
-    tree.push("0");
-    tree.push("6");
-    tree.push("6");
-    tree.push("z");
+    tree.push("a")
+        .push("b")
+        .push("5")
+        .push("0")
+        .push("6")
+        .push("6")
+        .push("z");
 
     println!("{:?}", tree);
     println!("{:?}", tree.min());
@@ -27,11 +27,10 @@ fn main() {
     println!("{:?}", tree.find(&"123"));
     println!("{:?}", tree.find(&"a"));
 
-    tree.delete(&"0");
-    tree.delete(&"10");
-    tree.delete(&"b");
-    tree.delete(&"a");
-
+    tree.delete(&"0")
+        .delete(&"10")
+        .delete(&"b")
+        .delete(&"a");
 
     println!("{:?}", tree);
 }

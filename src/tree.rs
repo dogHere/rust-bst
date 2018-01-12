@@ -127,7 +127,7 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn push(&mut self, value: T) {
+    pub fn push(&mut self, value: T)->Box<&mut Tree<T>> {
         match self.root {
             None=>{
                 swap(&mut self.root,&mut Some(Box::from(Node::new(value))));
@@ -136,6 +136,7 @@ impl<T: PartialOrd+Clone> Tree<T> {
                 n.push(value);
             }
         }
+        Box::from(self)
     }
 
     pub fn min(&self)->T{
@@ -166,7 +167,8 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn delete(&mut self,value:&T){
+    pub fn delete(&mut self,value:&T)->Box<&mut Tree<T>>{
         Node::delete(&mut self.root,value);
+        Box::from(self)
     }
 }

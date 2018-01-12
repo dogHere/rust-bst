@@ -77,7 +77,7 @@ impl<T: PartialOrd+Clone> Node<T> {
 
 
 
-    fn delete(node:&mut Child<T>,value:T){
+    fn delete(node:&mut Child<T>,value:&T){
         let mut  all_none = false;
         match *node{
             None=>{},
@@ -86,9 +86,9 @@ impl<T: PartialOrd+Clone> Node<T> {
                     all_none = true;
                 }else{
 
-                    if value > r.value(){
+                    if value > &r.value(){
                         Node::delete(&mut r.right,value);
-                    }else if value < r.value() {
+                    }else if value < &r.value() {
                         Node::delete(&mut r.left,value);
                     }else{
                         if r.right.is_none(){
@@ -166,7 +166,7 @@ impl<T: PartialOrd+Clone> Tree<T> {
         }
     }
 
-    pub fn delete(&mut self,value:T){
+    pub fn delete(&mut self,value:&T){
         Node::delete(&mut self.root,value);
     }
 }

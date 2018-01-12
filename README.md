@@ -27,10 +27,10 @@ fn main() {
     println!("{:?}", tree.find(&"123"));
     println!("{:?}", tree.find(&"a"));
 
-    tree.delete("0");
-    tree.delete("10");
-    tree.delete("b");
-    tree.delete("a");
+    tree.delete(&"0");
+    tree.delete(&"10");
+    tree.delete(&"b");
+    tree.delete(&"a");
 
 
     println!("{:?}", tree);

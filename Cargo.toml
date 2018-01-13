@@ -1,5 +1,5 @@
 [package]
-name = "bst-rs"
+name = "bst_rs"
 version = "0.2.0"
 authors = ["doghere"]
 

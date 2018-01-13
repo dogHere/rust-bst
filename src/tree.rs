@@ -129,8 +129,8 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
-    /// use bst::tree::*;
+    /// extern crate bst_rs;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();
@@ -159,9 +159,9 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
+    /// extern crate bst_rs;
     ///
-    /// use bst::tree::*;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();
@@ -188,9 +188,9 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
+    /// extern crate bst_rs;
     ///
-    /// use bst::tree::*;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();
@@ -215,9 +215,9 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
+    /// extern crate bst_rs;
     ///
-    /// use bst::tree::*;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();
@@ -257,9 +257,9 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
+    /// extern crate bst_rs;
     ///
-    /// use bst::tree::*;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();
@@ -287,9 +287,9 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst;
+    /// extern crate bst_rs;
     ///
-    /// use bst::tree::*;
+    /// use bst_rs::tree::*;
     ///
     /// fn main(){
     ///     let mut tree = Tree::new();

@@ -125,12 +125,12 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let  tree:Tree<i32> = Tree::new();
-    /// }
+    /// # }
     /// ```
     pub fn new() -> Tree<T> {
         Tree {
@@ -143,10 +143,10 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -154,7 +154,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///         .push("0")
     ///         .push("6")
     ///         .push("z");
-    /// }
+    /// # }
     /// ```
     pub fn push(&mut self, value: T) -> Box<&mut Tree<T>> {
         match self.root {
@@ -173,11 +173,11 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    ///
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// #
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -186,7 +186,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///         .push("6")
     ///         .push("z");
     ///     assert_eq!(tree.min(),Some("0"));
-    /// }
+    /// # }
     ///
     ///
     /// ```
@@ -202,11 +202,11 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    ///
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// #
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -215,7 +215,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///         .push("6")
     ///         .push("z");
     ///     assert_eq!(tree.max(),Some("z"));
-    /// }
+    /// # }
     /// ```
     pub fn max(&self) -> Option<T> {
         match self.root {
@@ -229,11 +229,11 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    ///
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// #
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -244,7 +244,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///
     ///     println!("{:?}",tree.find(&"5"));
     ///     assert_eq!(tree.find(&"100"),None);
-    /// }
+    /// # }
     /// ```
     pub fn find(&self, value: &T) -> Option<Box<&Node<T>>> {
         match self.root {
@@ -258,11 +258,11 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    ///
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// #
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -274,7 +274,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///     assert!(tree.exists(&"5"));
     ///
     ///     assert!(!tree.exists(&"100"));
-    /// }
+    /// # }
     /// ```
     pub fn exists(&self, value: &T) -> bool {
         match self.find(value) {
@@ -288,11 +288,11 @@ impl<T: PartialOrd + Clone> Tree<T> {
     /// # Examples
     ///
     /// ```
-    /// extern crate bst_rs;
-    ///
-    /// use bst_rs::tree::*;
-    ///
-    /// fn main(){
+    /// # extern crate bst_rs;
+    /// #
+    /// # use bst_rs::tree::*;
+    /// #
+    /// # fn main(){
     ///     let mut tree = Tree::new();
     ///     tree.push("a")
     ///         .push("b")
@@ -312,7 +312,7 @@ impl<T: PartialOrd + Clone> Tree<T> {
     ///
     ///     tree.delete(&"a");
     ///     println!("{:?}",tree);
-    /// }
+    /// # }
     /// ```
     pub fn delete(&mut self, value: &T) -> Box<&mut Tree<T>> {
         Node::delete(&mut self.root, value);

@@ -1,3 +1,4 @@
+//! bst detail.
 use std::mem::swap;
 
 type Child<T> = Option<Box<Node<T>>>;

@@ -5,9 +5,9 @@ A BST Tree in rust(Keep writing).
 # Example
 
 ```rust
-extern crate bst;
+extern crate bst_rs;
 
-use bst::tree::*;
+use bst_rs::tree::*;
 
 fn main() {
     let mut tree = Tree::new();

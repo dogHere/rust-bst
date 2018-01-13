@@ -3,4 +3,9 @@ name = "bst_rs"
 version = "0.2.0"
 authors = ["doghere"]
 
+description = "a simple bst"
+repository = "https://github.com/dogHere/rust-bst"
+keywords = ["bst"]
+license = "MIT"
+
 [dependencies]

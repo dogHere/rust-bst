@@ -1,5 +1,5 @@
 extern crate bst_rs;
-
+use bst_rs::tree::*;
 fn main() {
     let mut tree = Tree::new();
     tree.push("a")

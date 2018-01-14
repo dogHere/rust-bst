@@ -12,4 +12,4 @@ license = "MIT"
 
 [[bin]]
 name = "bst_rs"
-path = "src/main.rs
+path = "src/main.rs"

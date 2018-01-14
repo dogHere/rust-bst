@@ -9,3 +9,7 @@ keywords = ["bst"]
 license = "MIT"
 
 [dependencies]
+
+[[bin]]
+name = "bst_rs"
+path = "src/main.rs
